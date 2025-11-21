@@ -6,5 +6,6 @@
         "claude_code"
     ],
     "guidelines": [],
-    "sail": true
+    "sail": true,
+    "browser_logs": false
 }

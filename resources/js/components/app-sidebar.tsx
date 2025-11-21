@@ -10,7 +10,7 @@ import {
     SidebarMenuButton,
     SidebarMenuItem,
 } from '@/components/ui/sidebar';
-import { dashboard } from '@/routes';
+import { cotizador, dashboard, prospectos } from '@/routes';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/react';
 import { BookOpen, Folder, LayoutGrid } from 'lucide-react';
@@ -20,6 +20,16 @@ const mainNavItems: NavItem[] = [
     {
         title: 'Dashboard',
         href: dashboard(),
+        icon: LayoutGrid,
+    },
+    {
+        title: 'Cotizador',
+        href: cotizador(),
+        icon: LayoutGrid,
+    },
+    {
+        title: 'Prospectos',
+        href: prospectos(),
         icon: LayoutGrid,
     },
 ];

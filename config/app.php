@@ -56,6 +56,30 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | API URL
+    |--------------------------------------------------------------------------
+    |
+    | This is the base URL for the external API service used by the application.
+    | Configure this value in your .env file using the API_URL variable.
+    |
+    */
+
+    'api_url' => env('API_URL'),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Test Mode
+    |--------------------------------------------------------------------------
+    |
+    | When test mode is enabled, the application will bypass external API calls
+    | and use local authentication. This is useful for development and testing.
+    |
+    */
+
+    'test_mode' => (bool) env('APP_TEST_MODE', false),
+
+    /*
+    |--------------------------------------------------------------------------
     | Application Timezone
     |--------------------------------------------------------------------------
     |

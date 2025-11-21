@@ -10,12 +10,13 @@ import {
     REHYDRATE,
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage'; // localStorage
-import { notificationReducer, uiReducer } from './slices';
+import { notificationReducer, prospectosReducer, uiReducer } from './slices';
 
 // Combine all reducers
 const rootReducer = combineReducers({
     ui: uiReducer,
     notification: notificationReducer,
+    prospectos: prospectosReducer,
 });
 
 // Redux Persist configuration
@@ -23,9 +24,9 @@ const persistConfig = {
     key: 'root',
     version: 1,
     storage,
-    // Only persist specific slices if needed
-    // whitelist: ['ui'], // only ui will be persisted
-    // blacklist: ['notification'], // notification won't be persisted
+    // Persist prospectos form data, but not notifications
+    whitelist: ['prospectos'],
+    blacklist: ['notification'],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
