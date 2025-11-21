@@ -60,11 +60,13 @@ import { openModal, addNotification } from '@/redux/slices';
 dispatch(openModal('user-settings'));
 
 // Show notification
-dispatch(addNotification({
-    message: 'Saved successfully!',
-    type: 'success',
-    duration: 5000,
-}));
+dispatch(
+    addNotification({
+        message: 'Saved successfully!',
+        type: 'success',
+        duration: 5000,
+    }),
+);
 ```
 
 ## 🎯 Available Slices
@@ -74,12 +76,14 @@ dispatch(addNotification({
 Manages global UI state like modals, sidebars, and drawers.
 
 **State:**
+
 - `sidebarOpen: boolean`
 - `modalOpen: boolean`
 - `currentModal: string | null`
 - `drawerOpen: boolean`
 
 **Actions:**
+
 - `toggleSidebar()` - Toggle sidebar
 - `setSidebarOpen(boolean)` - Set sidebar state
 - `openModal(string)` - Open modal with ID
@@ -92,9 +96,11 @@ Manages global UI state like modals, sidebars, and drawers.
 Manages toast notifications.
 
 **State:**
+
 - `notifications: Notification[]`
 
 **Actions:**
+
 - `addNotification({ message, type, duration? })` - Add notification
 - `removeNotification(id)` - Remove notification by ID
 - `clearNotifications()` - Clear all notifications
@@ -126,10 +132,12 @@ const cartSlice = createSlice({
             state.total += action.payload.price;
         },
         removeItem: (state, action: PayloadAction<string>) => {
-            const item = state.items.find(i => i.id === action.payload);
+            const item = state.items.find((i) => i.id === action.payload);
             if (item) {
                 state.total -= item.price;
-                state.items = state.items.filter(i => i.id !== action.payload);
+                state.items = state.items.filter(
+                    (i) => i.id !== action.payload,
+                );
             }
         },
     },
@@ -181,7 +189,7 @@ Types are automatically inferred:
 ```tsx
 // RootState gives you full autocomplete
 const value = useAppSelector((state) => state.ui.sidebarOpen);
-                                    // ^ Full type safety
+// ^ Full type safety
 
 // AppDispatch ensures type-safe actions
 const dispatch = useAppDispatch();
@@ -191,6 +199,7 @@ dispatch(unknownAction()); // TypeScript error!
 ## 🌐 SSR Compatibility
 
 The setup automatically handles SSR:
+
 - **Client (`app.tsx`)**: Uses redux-persist with localStorage
 - **Server (`ssr.tsx`)**: Fresh store per request (no persistence)
 
@@ -213,5 +222,6 @@ No additional configuration needed!
 ## 🗑️ Cleanup
 
 After understanding the setup, you can safely delete:
+
 - `redux/example-usage.tsx`
 - `redux/README.md` (this file)

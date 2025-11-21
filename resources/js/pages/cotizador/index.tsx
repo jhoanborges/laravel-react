@@ -1,5 +1,5 @@
 import AppLayout from '@/layouts/app-layout';
-import { dashboard, cotizador } from '@/routes';
+import { cotizador, dashboard } from '@/routes';
 import { type BreadcrumbItem } from '@/types';
 import { Head } from '@inertiajs/react';
 import CotizadorForm from './cotizador-form';
@@ -20,7 +20,7 @@ export default function Cotizador() {
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Cotizador" />
             <div className="flex h-full flex-1 flex-col gap-4 overflow-x-auto p-4">
-                <div className="relative min-h-screen flex-1 overflow-hidden border border-sidebar-border/70 bg-background md:min-h-min dark:border-sidebar-border">
+                <div className="relative min-h-screen flex-1 overflow-hidden bg-background md:min-h-min">
                     <CotizadorForm />
                 </div>
             </div>

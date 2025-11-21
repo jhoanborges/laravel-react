@@ -13,29 +13,29 @@ import {
 import { cotizador, dashboard, prospectos } from '@/routes';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/react';
-import { BookOpen, Folder, LayoutGrid } from 'lucide-react';
+import { Calculator, ChartColumnStacked, UserStar } from 'lucide-react';
 import AppLogo from './app-logo';
 
 const mainNavItems: NavItem[] = [
     {
         title: 'Dashboard',
         href: dashboard(),
-        icon: LayoutGrid,
+        icon: <ChartColumnStacked strokeWidth={1} />,
     },
     {
         title: 'Cotizador',
         href: cotizador(),
-        icon: LayoutGrid,
+        icon: <Calculator strokeWidth={1} />,
     },
     {
         title: 'Prospectos',
         href: prospectos(),
-        icon: LayoutGrid,
+        icon: <UserStar strokeWidth={1} />,
     },
 ];
 
 const footerNavItems: NavItem[] = [
-    {
+    /*{
         title: 'Repository',
         href: 'https://github.com/laravel/react-starter-kit',
         icon: Folder,
@@ -44,7 +44,7 @@ const footerNavItems: NavItem[] = [
         title: 'Documentation',
         href: 'https://laravel.com/docs/starter-kits#react',
         icon: BookOpen,
-    },
+    },*/
 ];
 
 export function AppSidebar() {

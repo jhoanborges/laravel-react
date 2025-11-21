@@ -1,3 +1,4 @@
+import { store } from '@/actions/App/Http/Controllers/Auth/LoginController';
 import InputError from '@/components/input-error';
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
@@ -5,7 +6,6 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Spinner } from '@/components/ui/spinner';
 import AuthLayout from '@/layouts/auth-layout';
-import { store } from '@/actions/App/Http/Controllers/Auth/LoginController';
 import { Form, Head, Link, usePage } from '@inertiajs/react';
 import { useEffect } from 'react';
 
@@ -14,10 +14,7 @@ interface LoginProps {
     canResetPassword: boolean;
 }
 
-export default function Login({
-    status,
-    canResetPassword,
-}: LoginProps) {
+export default function Login({ status, canResetPassword }: LoginProps) {
     const { errors } = usePage().props;
 
     useEffect(() => {
@@ -54,7 +51,7 @@ export default function Login({
                         <div className="grid gap-2">
                             <Label htmlFor="username">Username</Label>
                             <Input
-                                value={"carment"}
+                                value={'carment'}
                                 id="username"
                                 type="text"
                                 name="username"
@@ -79,7 +76,7 @@ export default function Login({
                             </div>
                             <Input
                                 id="password"
-                                value={"Password1"}
+                                value={'Password1'}
                                 type="password"
                                 name="password"
                                 required

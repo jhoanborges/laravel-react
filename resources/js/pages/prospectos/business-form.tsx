@@ -1,36 +1,84 @@
-'use client'
+'use client';
 
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { Button } from '@/components/ui/button'
-import { SearchForm } from './search-form'
-import { PersonalInfoSection } from './personal-info-section'
-import { FisicaSection } from './fisica-section'
-import { MoralSection } from './moral-section'
-import { ContactSection } from './contact-section'
-import { AddressSection } from './address-section'
-import { ContactsTable } from './contacts-table'
-import { HRSection } from './hr-section'
-import { ExternalEntitiesSection } from './external-entities-section'
-import { useActiveTab, usePersonType } from '@/hooks/useProspectos'
+import { Button } from '@/components/ui/button';
+import {
+    Card,
+    CardContent,
+    CardDescription,
+    CardHeader,
+    CardTitle,
+} from '@/components/ui/card';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { useActiveTab, usePersonType } from '@/hooks/useProspectos';
+import { AddressSection } from './address-section';
+import { ContactSection } from './contact-section';
+import { ContactsTable } from './contacts-table';
+import { ExternalEntitiesSection } from './external-entities-section';
+import { FisicaSection } from './fisica-section';
+import { HRSection } from './hr-section';
+import { MoralSection } from './moral-section';
+import { PersonalInfoSection } from './personal-info-section';
 
 export function BusinessForm() {
-    const { activeTab, setActiveTab } = useActiveTab()
-    const { personType } = usePersonType()
+    const { activeTab, setActiveTab } = useActiveTab();
+    const { personType } = usePersonType();
 
     return (
         <div className="w-full space-y-4 p-4">
-            <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-
+            <Tabs
+                value={activeTab}
+                onValueChange={setActiveTab}
+                className="w-full"
+            >
                 <TabsList className="inline-flex h-auto w-full flex-wrap items-center justify-start gap-1 rounded-md bg-muted p-1 text-muted-foreground">
-                    <TabsTrigger value="prospect" className="flex-shrink-0">Prospecto</TabsTrigger>
-                    <TabsTrigger disabled value="address" className="flex-shrink-0">Dirección</TabsTrigger>
-                    <TabsTrigger disabled value="contacts" className="flex-shrink-0">Contactos</TabsTrigger>
-                    <TabsTrigger disabled value="hr" className="flex-shrink-0">Recursos Humanos</TabsTrigger>
-                    <TabsTrigger disabled value="external" className="flex-shrink-0">Datos Entidades</TabsTrigger>
-                    <TabsTrigger disabled value="documents" className="flex-shrink-0">Documentos</TabsTrigger>
-                    <TabsTrigger disabled value="transaction" className="flex-shrink-0">Perfil Transaccional</TabsTrigger>
-                    <TabsTrigger disabled value="property" className="flex-shrink-0">Propietario Real</TabsTrigger>
+                    <TabsTrigger value="prospect" className="flex-shrink-0">
+                        Prospecto
+                    </TabsTrigger>
+                    <TabsTrigger
+                        disabled
+                        value="address"
+                        className="flex-shrink-0"
+                    >
+                        Dirección
+                    </TabsTrigger>
+                    <TabsTrigger
+                        disabled
+                        value="contacts"
+                        className="flex-shrink-0"
+                    >
+                        Contactos
+                    </TabsTrigger>
+                    <TabsTrigger disabled value="hr" className="flex-shrink-0">
+                        Recursos Humanos
+                    </TabsTrigger>
+                    <TabsTrigger
+                        disabled
+                        value="external"
+                        className="flex-shrink-0"
+                    >
+                        Datos Entidades
+                    </TabsTrigger>
+                    <TabsTrigger
+                        disabled
+                        value="documents"
+                        className="flex-shrink-0"
+                    >
+                        Documentos
+                    </TabsTrigger>
+                    <TabsTrigger
+                        disabled
+                        value="transaction"
+                        className="flex-shrink-0"
+                    >
+                        Perfil Transaccional
+                    </TabsTrigger>
+                    <TabsTrigger
+                        disabled
+                        value="property"
+                        className="flex-shrink-0"
+                    >
+                        Propietario Real
+                    </TabsTrigger>
                 </TabsList>
 
                 <TabsContent value="prospect" className="space-y-4">
@@ -38,11 +86,11 @@ export function BusinessForm() {
                         <CardHeader>
                             <CardTitle>Información del Prospecto</CardTitle>
                             <CardDescription>
-                                Ingrese los datos del prospecto. Haga clic en guardar cuando termine.
+                                Ingrese los datos del prospecto. Haga clic en
+                                guardar cuando termine.
                             </CardDescription>
                         </CardHeader>
                         <CardContent className="space-y-6">
-                            <SearchForm />
                             <PersonalInfoSection />
                             {personType === 'fisica' && <FisicaSection />}
                             {personType === 'moral' && <MoralSection />}
@@ -61,7 +109,8 @@ export function BusinessForm() {
                         <CardHeader>
                             <CardTitle>Dirección</CardTitle>
                             <CardDescription>
-                                Gestione la información de dirección del prospecto.
+                                Gestione la información de dirección del
+                                prospecto.
                             </CardDescription>
                         </CardHeader>
                         <CardContent className="space-y-6">
@@ -126,7 +175,7 @@ export function BusinessForm() {
                             </CardDescription>
                         </CardHeader>
                         <CardContent>
-                            <div className="text-center text-muted-foreground py-8">
+                            <div className="py-8 text-center text-muted-foreground">
                                 Contenido de documentos
                             </div>
                         </CardContent>
@@ -138,11 +187,12 @@ export function BusinessForm() {
                         <CardHeader>
                             <CardTitle>Perfil Transaccional</CardTitle>
                             <CardDescription>
-                                Información sobre el perfil transaccional del prospecto.
+                                Información sobre el perfil transaccional del
+                                prospecto.
                             </CardDescription>
                         </CardHeader>
                         <CardContent>
-                            <div className="text-center text-muted-foreground py-8">
+                            <div className="py-8 text-center text-muted-foreground">
                                 Contenido de perfil transaccional
                             </div>
                         </CardContent>
@@ -158,7 +208,7 @@ export function BusinessForm() {
                             </CardDescription>
                         </CardHeader>
                         <CardContent>
-                            <div className="text-center text-muted-foreground py-8">
+                            <div className="py-8 text-center text-muted-foreground">
                                 Contenido de propietario real
                             </div>
                         </CardContent>
@@ -166,5 +216,5 @@ export function BusinessForm() {
                 </TabsContent>
             </Tabs>
         </div>
-    )
+    );
 }

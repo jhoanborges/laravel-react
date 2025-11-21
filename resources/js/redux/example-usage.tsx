@@ -114,23 +114,23 @@ export function ExampleNotifications() {
 export default function ExamplePage() {
     return (
         <div className="p-8">
-            <h1 className="text-2xl font-bold mb-4">Redux Usage Examples</h1>
+            <h1 className="mb-4 text-2xl font-bold">Redux Usage Examples</h1>
 
             <div className="space-y-8">
                 <section>
-                    <h2 className="text-xl font-semibold mb-2">
+                    <h2 className="mb-2 text-xl font-semibold">
                         Sidebar State
                     </h2>
                     <ExampleSidebarToggle />
                 </section>
 
                 <section>
-                    <h2 className="text-xl font-semibold mb-2">Modal State</h2>
+                    <h2 className="mb-2 text-xl font-semibold">Modal State</h2>
                     <ExampleModalControl />
                 </section>
 
                 <section>
-                    <h2 className="text-xl font-semibold mb-2">
+                    <h2 className="mb-2 text-xl font-semibold">
                         Notifications
                     </h2>
                     <ExampleNotifications />

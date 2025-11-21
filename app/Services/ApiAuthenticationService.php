@@ -379,6 +379,109 @@ class ApiAuthenticationService
     }
 
     /**
+     * Update user password via external API
+     */
+    public function updatePassword(string $usuario, string $newPassword, string $token): bool
+    {
+        $this->lastError = null;
+        $this->lastStatusCode = null;
+        $this->lastApiUrl = "{$this->apiUrl}/USR/PWD/UPD";
+
+        // Bypass API in test mode
+        if (config('app.test_mode')) {
+            Log::info('TEST MODE: Bypassing API password update', [
+                'usuario' => $usuario,
+            ]);
+
+            return true;
+        }
+
+        Log::info('Updating password via API', [
+            'usuario' => $usuario,
+            'api_url' => $this->lastApiUrl,
+        ]);
+
+        try {
+            // Encode password update data to Base64
+            $credentials = [
+                'usuario' => $usuario,
+                'contrasena' => $newPassword,
+                'tkn' => $token,
+            ];
+
+            $base64Content = base64_encode(json_encode($credentials));
+
+            Log::debug('Password update payload', [
+                'endpoint' => $this->lastApiUrl,
+                'payload_length' => strlen($base64Content),
+            ]);
+
+            // Make API request
+            $response = Http::timeout(10)
+                ->withHeaders(['Content-Type' => 'application/json'])
+                ->post($this->lastApiUrl, [
+                    'Content' => $base64Content,
+                ]);
+
+            $this->lastStatusCode = $response->status();
+
+            if (! $response->successful()) {
+                $this->lastError = "API request failed with status {$response->status()}: {$response->body()}";
+
+                Log::warning('Password update request failed', [
+                    'usuario' => $usuario,
+                    'status' => $response->status(),
+                    'body' => $response->body(),
+                    'url' => $this->lastApiUrl,
+                ]);
+
+                return false;
+            }
+
+            // Decode response
+            $responseData = $response->json();
+
+            Log::debug('Password update response', [
+                'usuario' => $usuario,
+                'status' => $responseData['Status'] ?? 'not set',
+            ]);
+
+            // Check if update was successful
+            if (! isset($responseData['Status']) || $responseData['Status'] !== 1) {
+                $this->lastError = $responseData['Body'] ?? 'Password update rejected by API';
+
+                Log::warning('Password update rejected by API', [
+                    'usuario' => $usuario,
+                    'status' => $responseData['Status'] ?? 'not set',
+                    'error' => $this->lastError,
+                    'url' => $this->lastApiUrl,
+                ]);
+
+                return false;
+            }
+
+            Log::info('Password updated successfully via API', [
+                'usuario' => $usuario,
+                'message' => $responseData['Body'] ?? 'OK',
+            ]);
+
+            return true;
+        } catch (\Exception $e) {
+            $this->lastError = "Exception: {$e->getMessage()}";
+
+            Log::error('Password update exception', [
+                'usuario' => $usuario,
+                'message' => $e->getMessage(),
+                'file' => $e->getFile(),
+                'line' => $e->getLine(),
+                'url' => $this->lastApiUrl,
+            ]);
+
+            return false;
+        }
+    }
+
+    /**
      * Sync user data from API to local database
      */
     private function syncUser(array $userData, string $token, ?int $origen): User

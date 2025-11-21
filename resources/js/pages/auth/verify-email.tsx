@@ -1,9 +1,9 @@
 // Components
+import { destroy } from '@/actions/App/Http/Controllers/Auth/LoginController';
 import TextLink from '@/components/text-link';
 import { Button } from '@/components/ui/button';
 import { Spinner } from '@/components/ui/spinner';
 import AuthLayout from '@/layouts/auth-layout';
-import { destroy } from '@/actions/App/Http/Controllers/Auth/LoginController';
 import { Form, Head, router } from '@inertiajs/react';
 
 export default function VerifyEmail({ status }: { status?: string }) {

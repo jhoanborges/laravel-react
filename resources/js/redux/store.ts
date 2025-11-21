@@ -10,13 +10,19 @@ import {
     REHYDRATE,
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage'; // localStorage
-import { notificationReducer, prospectosReducer, uiReducer } from './slices';
+import {
+    cotizadorReducer,
+    notificationReducer,
+    prospectosReducer,
+    uiReducer,
+} from './slices';
 
 // Combine all reducers
 const rootReducer = combineReducers({
     ui: uiReducer,
     notification: notificationReducer,
     prospectos: prospectosReducer,
+    cotizador: cotizadorReducer,
 });
 
 // Redux Persist configuration
@@ -24,8 +30,8 @@ const persistConfig = {
     key: 'root',
     version: 1,
     storage,
-    // Persist prospectos form data, but not notifications
-    whitelist: ['prospectos'],
+    // Persist prospectos and cotizador form data, but not notifications
+    whitelist: ['prospectos', 'cotizador'],
     blacklist: ['notification'],
 };
 
@@ -38,7 +44,14 @@ export const store = configureStore({
         getDefaultMiddleware({
             serializableCheck: {
                 // Ignore redux-persist actions
-                ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+                ignoredActions: [
+                    FLUSH,
+                    REHYDRATE,
+                    PAUSE,
+                    PERSIST,
+                    PURGE,
+                    REGISTER,
+                ],
             },
         }),
 });
